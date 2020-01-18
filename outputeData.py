@@ -1,24 +1,25 @@
-f = open('data.txt', 'r')
-out = open('output.txt', 'w')
-line = f.readline()
-
-
 def pts(line):
-    return out.write(line.replace(',', " ").replace('.'," "))
+    return line.replace(',', " ").replace('.', " ")
 
 
 def dsts(line):
-    return out.write(line.replace('  '," "))
+    return line.replace('  ', " ")
 
 
 def low(line):
-    return out.write(line.lower())
+    return line.lower()
 
 
-for line in f:
-    pts(line)
-    dsts(line)
-    low(line)
+if __name__ == '__main__':
+    f = open('data.txt', 'r')
+    out = open('output.txt', 'w')
+    line = f.readline()
+    for line in f:
+        line = pts(line)
+        line = dsts(line)
+        line = low(line)
+        out.write(line)
 
-f.close()
-out.close()
+    f.close()
+    out.close()
+
