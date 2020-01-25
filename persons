@@ -1,0 +1,30 @@
+import re
+
+if __name__ == '__main__':
+    f = open('data.txt', 'r')
+    line = f.readline()
+    persons = []
+    for line in f:
+        person_id = re.match(r'\d{1,3}',line)
+        person_name = re.search(r'[A-Z][a-z]{1,8}',line)
+        person_age = re.findall(r'\d{1,3}',line)
+        person_phone = re.search(r'[+][\d]{1,11}',line)
+        person_mail = re.search(r'[A-z|\d]+[@][A-z]+[.][A-z]+',line)
+        person_role = re.search(r'(admin)|(user)|(guest)',line)
+        person_status = re.search(r'(active)|(inactive)',line)
+        if person_phone is not None:
+            person_phone = person_phone.group(0)
+        if person_mail is not None:
+            person_mail = person_mail.group(0)
+        if person_role is not None:
+            person_role = person_role.group(0)
+        if person_status is not None:
+            person_status = person_status.group(0)
+        person = {'id': person_id.group(0), 'name': person_name.group(0), 'age': person_age[1], 'phone': person_phone, 'email': person_mail,
+                  'role': person_role, 'status': person_status}
+        persons.append(person)
+
+    print(persons)
+
+    f.close()
+    
