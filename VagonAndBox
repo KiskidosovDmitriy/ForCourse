@@ -1,0 +1,62 @@
+class Vagon(object):
+    def __init__(self, height, wide, long, maxMass):
+        self.maxMass = maxMass
+        self.height = height
+        self.wide = wide
+        self.long = long
+        self.sizelimit = self.wide *self.long *self.height
+        self.boxlist = []
+        self.mass = 0
+        self.size = 0
+        self.notinBoxlist = []
+
+    def putInVagon(self, box):
+        if box.bwide <= self.wide and box.bheight <= self.height and box.blong <= self.long and self.maxMass >= box.bmass + self.mass and self.sizelimit >= self.size + box.bsize:
+            self.size = self.size + box.bsize
+            self.boxlist.append(box.name)
+            self.mass = self.mass + box.bmass
+        else:
+            self.notinBoxlist.append(box.name)
+
+    def printVagon(self):
+        print('vagon hight =',self.height, 'vagon wide = ',self.wide, 'vagon long =',self.long,'vagon maxMass = ',self.maxMass,'vagon mass = ',self.mass, 'vagon size = ',self.size)
+
+
+class Box(object):
+    def __init__(self, name, bheight, bwide, blong, bmass):
+        self.bmass = bmass
+        self.blong = blong
+        self.bwide = bwide
+        self.bheight = bheight
+        self.bsize = blong * bheight * bwide
+        self.name = name
+
+
+if __name__ == "__main__":
+    vagon = Vagon(20, 40, 60, 20)
+    box1 = Box('box1', 5, 5, 5, 5)
+    box2 = Box('box2', 5, 5, 5, 5)
+    box3 = Box('box3', 5, 5, 5, 5)
+    box4 = Box('box4', 5, 5, 5, 5)
+    box5 = Box('box5', 5, 5, 5, 5)
+    box6 = Box('box6', 5, 5, 5, 5)
+    box7 = Box('box7', 5, 5, 5, 5)
+    box8 = Box('box8', 5, 5, 5, 5)
+    box9 = Box('box9', 5, 5, 5, 5)
+    box10 = Box('box10', 5, 5, 5, 5)
+    vagon.putInVagon(box1)
+    vagon.putInVagon(box2)
+    vagon.putInVagon(box3)
+    vagon.putInVagon(box4)
+    vagon.putInVagon(box5)
+    vagon.putInVagon(box6)
+    vagon.putInVagon(box7)
+    vagon.putInVagon(box8)
+    vagon.putInVagon(box9)
+    vagon.putInVagon(box10)
+
+    print(vagon.boxlist)
+    print(vagon.mass, vagon.maxMass)
+    print(vagon.notinBoxlist)
+    vagon.printVagon()
+    print(vagon.sizelimit)
